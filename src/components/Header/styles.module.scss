@@ -1,0 +1,16 @@
+.header {
+  background-color: #008000;
+  color: #ffffff;
+}
+
+.container {
+  max-width: 1240px;
+  padding: 0 4rem;
+  margin: 0 auto;
+
+  div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
