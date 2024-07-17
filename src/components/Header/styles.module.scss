@@ -1,5 +1,5 @@
 .header {
-  background-color: #008000;
+  background-color: hsl(0, 0%, 4%);
   color: #ffffff;
 }
 
@@ -12,5 +12,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    transform: translateY(50%);
   }
 }

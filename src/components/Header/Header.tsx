@@ -13,9 +13,9 @@ export const Header: React.FC = () => {
         </div>
 
         <div>
-          <StatsCard />
-          <StatsCard />
-          <StatsCard />
+          <StatsCard title="Total de Tarefas" value={5} />
+          <StatsCard title="Tarefas Pendentes" value={4} />
+          <StatsCard title="Tarefas Concluidas" value={1} />
         </div>
       </div>
     </header>
