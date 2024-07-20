@@ -1,4 +1,3 @@
-import { Stats } from "fs";
 import styles from "./styles.module.scss";
 import { StatsCard } from "../StatsCard/StatsCard";
 
