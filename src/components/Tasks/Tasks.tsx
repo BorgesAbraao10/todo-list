@@ -1,15 +1,10 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import styles from "./styles.module.scss";
-
-interface Task {
-  title: string;
-  done: boolean;
-  id: number;
-}
+import { TasksContext } from "../../context/TasksContext";
 
 export const Tasks: React.FC = () => {
   const [taskTitle, setTaskTitle] = useState("");
-  const [task, setTasks] = useState([] as Task[]);
+  const { task, setTasks } = useContext(TasksContext);
 
   // Funçao disparada quando o usuário está querendo adicionar uma nova tarefa
 
@@ -28,17 +23,25 @@ export const Tasks: React.FC = () => {
     ];
 
     setTasks(newTask);
-    localStorage.setItem("task", JSON.stringify(newTask));
+    localStorage.setItem("tasks", JSON.stringify(newTask));
 
     setTaskTitle("");
   }
 
-  useEffect(() => {
-    const tasksOnLocalStorage = localStorage.getItem("task");
-    if (tasksOnLocalStorage) {
-      setTasks(JSON.parse(tasksOnLocalStorage));
-    }
-  }, []);
+  function handleToogleTaskStatus(taskId: number) {
+    const newTask = task.map((task) => {
+      if (taskId === task.id) {
+        return {
+          ...task,
+          done: !task.done,
+        };
+      }
+
+      return task;
+    });
+
+    setTasks(newTask);
+  }
 
   return (
     <section className={styles.container}>
@@ -60,8 +63,17 @@ export const Tasks: React.FC = () => {
         {task.map((task) => {
           return (
             <li key={task.id}>
-              <input type="checkbox" id={`task-${task.id}`} />
-              <label htmlFor={`task-${task.id}`}>{task.title}</label>
+              <input
+                type="checkbox"
+                id={`task-${task.id}`}
+                onChange={() => handleToogleTaskStatus(task.id)}
+              />
+              <label
+                className={task.done ? styles.done : ""}
+                htmlFor={`task-${task.id}`}
+              >
+                {task.title}
+              </label>
             </li>
           );
         })}
